@@ -1,0 +1,251 @@
+:root {
+  --bg-void: #05070C;
+  --ink-100: #F5F1E8;
+  --ink-60: rgba(245, 241, 232, 0.6);
+  --teal: #2FE6C6;
+  --teal-dark: #1CB39B;
+  --gold: #F4B740;
+  --panel: rgba(10, 15, 24, 0.72);
+  --panel-border: rgba(47, 230, 198, 0.18);
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-void);
+  overflow: hidden;
+  font-family: var(--font-body);
+  color: var(--ink-100);
+}
+
+#game-root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#arena {
+  display: block;
+  background: #05070C;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px rgba(47, 230, 198, 0.14), 0 30px 80px rgba(0, 0, 0, 0.6);
+  cursor: crosshair;
+}
+
+#hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#hud-top-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: var(--teal);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+#hud-ammo {
+  display: flex;
+  gap: 6px;
+}
+
+.pip {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--teal);
+  background: transparent;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pip.filled {
+  background: var(--teal);
+  box-shadow: 0 0 8px rgba(47, 230, 198, 0.7);
+}
+
+#hud-super {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.hud-super-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+}
+
+.hud-super-track {
+  width: 220px;
+  height: 12px;
+  border-radius: 6px;
+  background: rgba(10, 15, 24, 0.7);
+  border: 1px solid rgba(244, 183, 64, 0.35);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+#hud-super-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #C98A2F, var(--gold));
+}
+
+#hud-super.is-ready .hud-super-track {
+  box-shadow: 0 0 16px rgba(244, 183, 64, 0.85);
+}
+
+#hud-controls {
+  align-self: flex-start;
+  font-size: 12px;
+  color: var(--ink-60);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  padding: 6px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
+#menu-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(15, 27, 46, 0.92), rgba(5, 7, 12, 0.98));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+#menu-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  max-width: 420px;
+  padding: 20px;
+}
+
+.menu-eyebrow {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  color: var(--teal);
+  font-weight: 700;
+}
+
+.menu-card h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 64px;
+  letter-spacing: 0.02em;
+  margin: 4px 0 0;
+  background: linear-gradient(180deg, var(--ink-100), var(--teal));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.menu-tag {
+  font-size: 14px;
+  color: var(--ink-60);
+  margin: 0 0 6px;
+}
+
+.menu-controls {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--ink-100);
+}
+
+.menu-controls b {
+  color: var(--gold);
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+  margin-right: 6px;
+}
+
+#play-btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  color: #05070C;
+  background: linear-gradient(180deg, var(--teal), var(--teal-dark));
+  border: none;
+  padding: 12px 34px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(47, 230, 198, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#play-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(47, 230, 198, 0.45);
+}
+
+#play-btn:active {
+  transform: translateY(0);
+}
+
+.menu-footnote {
+  font-size: 11px;
+  color: var(--ink-60);
+  max-width: 320px;
+  margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+  .menu-card h1 {
+    font-size: 44px;
+  }
+  .hud-super-track {
+    width: 160px;
+  }
+  #hud-controls {
+    font-size: 10px;
+  }
+}
